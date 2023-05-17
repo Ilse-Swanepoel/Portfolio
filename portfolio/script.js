@@ -48,3 +48,33 @@ function toggleBurger() {
   navItems.classList.remove('open')
   navItems.classList.add('close')
 }
+
+
+const contactForm = document.getElementById("contact-form"),
+  contactMessage = document.getElementById("contact-message");
+
+const sendEmail = (e) => {
+  e.preventDefault();
+
+  emailjs
+    .sendForm(
+      "service_89j8ndv",
+      "template_o450b1s",
+      "#contact-form",
+      "B2n_U6rKZ5vIhg3Zf"
+    )
+    .then(
+      () => {
+        contactMessage.textContent = "Message sent successfully ✅";
+
+        setTimeout(() => {
+          contactMessage.textContent = "";
+        }, 5000);
+
+        contactForm.reset();
+      },
+      () => {
+        contactMessage.textContent = "Message not sent (service error) ❌";
+      }
+    );
+};
